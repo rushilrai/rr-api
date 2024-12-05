@@ -38,5 +38,7 @@ export function initLogger() {
     LOGGER = getLogger();
   } catch (error) {
     console.error("failed to init logger:", error);
+
+    throw error;
   }
 }
