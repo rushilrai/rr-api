@@ -1,5 +1,9 @@
+import { initLogger, LOGGER } from "./configs/logger.config.ts";
+
 function main() {
-  console.log("rr-api");
+  initLogger();
+
+  LOGGER.debug("rr-api");
 }
 
 main();

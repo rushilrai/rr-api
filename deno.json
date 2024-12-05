@@ -10,5 +10,9 @@
             "singleQuote": false,
             "semiColons": true
         }
+    },
+    "imports": {
+        "@std/fs": "jsr:@std/fs@^1.0.6",
+        "@std/log": "jsr:@std/log@^0.224.11"
     }
 }
