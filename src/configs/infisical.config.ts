@@ -25,9 +25,13 @@ export async function connectToInfisical() {
       clientSecret: INFISICAL_CLIENT_SECRET,
     });
 
-    await client.secrets().listSecrets({
+    const secrets = await client.secrets().listSecrets({
       environment: INFISICAL_ENV,
       projectId: INFISICAL_PROJECT_ID,
+    });
+
+    secrets.secrets.forEach((secret) => {
+      Deno.env.set(secret.secretKey, secret.secretValue);
     });
 
     LOGGER.debug("Retreived Secrets from Infisical");
