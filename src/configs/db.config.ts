@@ -38,3 +38,13 @@ export async function connectToDb() {
     throw error;
   }
 }
+
+export async function disconnectFromDb() {
+  try {
+    await db.destroy();
+
+    LOGGER.debug("Disconnected from DB");
+  } catch (error) {
+    LOGGER.error(error);
+  }
+}

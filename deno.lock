@@ -10,7 +10,8 @@
     "jsr:@std/path@^1.0.8": "1.0.8",
     "npm:@infisical/sdk@^3.0.4": "3.0.4",
     "npm:kysely@~0.27.4": "0.27.4",
-    "npm:pg-pool@*": "3.7.0_pg@8.13.1"
+    "npm:pg-pool@*": "3.7.0_pg@8.13.1",
+    "npm:pg@*": "8.13.1"
   },
   "jsr": {
     "@hono/hono@4.6.12": {
@@ -386,6 +387,7 @@
       "jsr:@std/dotenv@~0.225.2",
       "jsr:@std/fs@^1.0.6",
       "jsr:@std/log@~0.224.11",
+      "jsr:@std/path@^1.0.8",
       "npm:@infisical/sdk@^3.0.4",
       "npm:kysely@~0.27.4",
       "npm:pg-pool@*",
