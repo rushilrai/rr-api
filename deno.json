@@ -20,6 +20,7 @@
         "@std/path": "jsr:@std/path@^1.0.8",
         "kysely": "npm:kysely@^0.27.4",
         "pg": "npm:pg",
-        "pg-pool": "npm:pg-pool"
+        "pg-pool": "npm:pg-pool",
+        "resend": "npm:resend@^4.1.1"
     }
 }

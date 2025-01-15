@@ -3,7 +3,7 @@ import { FileMigrationProvider, Migrator } from "kysely";
 
 import { initLogger } from "../../configs/logger.config.ts";
 import { connectToInfisical } from "../../configs/infisical.config.ts";
-import { connectToDb, db, disconnectFromDb } from "../../configs/db.config.ts";
+import { connectToDb, DB, disconnectFromDb } from "../../configs/db.config.ts";
 import { LOGGER } from "../../configs/logger.config.ts";
 
 export async function migrateUpDb() {
@@ -13,7 +13,7 @@ export async function migrateUpDb() {
     await connectToDb();
 
     const migrator = new Migrator({
-      db,
+      db: DB,
       provider: new FileMigrationProvider({
         fs: {
           readdir: async (dirPath: string) => {

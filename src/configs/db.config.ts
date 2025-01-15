@@ -8,7 +8,7 @@ interface Database {
   sample: SampleTable;
 }
 
-export let db: Kysely<Database>;
+export let DB: Kysely<Database>;
 
 export async function connectToDb() {
   try {
@@ -18,7 +18,6 @@ export async function connectToDb() {
       user: "",
       password: "",
       port: 5432,
-      max: 10,
     });
 
     await pool.query("SELECT NOW()");
@@ -27,13 +26,13 @@ export async function connectToDb() {
       pool: pool,
     });
 
-    db = new Kysely<Database>({
+    DB = new Kysely<Database>({
       dialect,
     });
 
     LOGGER.debug("Connected to DB");
   } catch (error) {
-    LOGGER.error(error);
+    LOGGER.error("Could not connect to DB", error);
 
     throw error;
   }
@@ -41,10 +40,12 @@ export async function connectToDb() {
 
 export async function disconnectFromDb() {
   try {
-    await db.destroy();
+    await DB.destroy();
 
     LOGGER.debug("Disconnected from DB");
   } catch (error) {
-    LOGGER.error(error);
+    LOGGER.error("Could not connect to DB", error);
+
+    throw error;
   }
 }

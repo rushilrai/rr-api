@@ -391,7 +391,8 @@
       "npm:@infisical/sdk@^3.0.4",
       "npm:kysely@~0.27.4",
       "npm:pg-pool@*",
-      "npm:pg@*"
+      "npm:pg@*",
+      "npm:resend@^4.1.1"
     ]
   }
 }

@@ -36,7 +36,7 @@ export async function connectToInfisical() {
 
     LOGGER.debug("Retreived Secrets from Infisical");
   } catch (error) {
-    LOGGER.error(error);
+    LOGGER.error("Could not retrieve secrets from Infisical", error);
 
     throw error;
   }
