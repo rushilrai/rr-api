@@ -1,3 +1,5 @@
+import "@std/dotenv/load";
+
 import * as path from "@std/path";
 import { FileMigrationProvider, Migrator } from "kysely";
 
@@ -6,7 +8,7 @@ import { connectToInfisical } from "../../configs/infisical.config.ts";
 import { connectToDb, DB, disconnectFromDb } from "../../configs/db.config.ts";
 import { LOGGER } from "../../configs/logger.config.ts";
 
-export async function migrateUpDb() {
+async function migrateUpDb() {
   try {
     initLogger();
     await connectToInfisical();
@@ -57,3 +59,5 @@ export async function migrateUpDb() {
     Deno.exit(1);
   }
 }
+
+migrateUpDb();
