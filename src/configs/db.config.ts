@@ -12,12 +12,28 @@ export let DB: Kysely<Database>;
 
 export async function connectToDb() {
   try {
+    const DB_NAME = Deno.env.get("DB_NAME");
+    const DB_HOST = Deno.env.get("DB_HOST");
+    const DB_USER = Deno.env.get("DB_USER");
+    const DB_PASSWORD = Deno.env.get("DB_PASSWORD");
+    const DB_PORT = Deno.env.get("DB_PORT");
+
+    if (
+      DB_NAME === undefined ||
+      DB_HOST === undefined ||
+      DB_USER === undefined ||
+      DB_PASSWORD === undefined ||
+      DB_PORT === undefined
+    ) {
+      throw new Error("DB environment variables not set");
+    }
+
     const pool = new Pool({
-      database: "",
-      host: "",
-      user: "",
-      password: "",
-      port: 5432,
+      database: DB_NAME,
+      host: DB_HOST,
+      user: DB_USER,
+      password: DB_PASSWORD,
+      port: DB_PORT,
     });
 
     await pool.query("SELECT NOW()");
