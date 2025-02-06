@@ -1,10 +1,17 @@
 import { DB } from "../../configs/db.config.ts";
 import { LOGGER } from "../../configs/logger.config.ts";
-import { NewSample, Sample } from "./sample.model.ts";
+import {
+  NewSample,
+  NewSampleSchema,
+  Sample,
+  SampleSchema,
+} from "./sample.model.ts";
 
 export class SampleService {
   async createSample(sample: NewSample) {
     try {
+      NewSampleSchema.parse(sample);
+
       const result = await DB.insertInto("sample").values(sample).returning(
         "id",
       ).executeTakeFirstOrThrow();
@@ -21,6 +28,8 @@ export class SampleService {
 
   async readSampleById(id: Sample["id"]) {
     try {
+      SampleSchema.shape.id.parse(id);
+
       const result = await DB.selectFrom("sample").where("id", "=", id)
         .selectAll().executeTakeFirstOrThrow();
 

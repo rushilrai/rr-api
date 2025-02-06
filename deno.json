@@ -25,6 +25,7 @@
         "kysely": "npm:kysely@^0.27.4",
         "pg": "npm:pg",
         "pg-pool": "npm:pg-pool",
-        "resend": "npm:resend@^4.1.1"
+        "resend": "npm:resend@^4.1.1",
+        "zod": "npm:zod@^3.24.1"
     }
 }
