@@ -1,7 +1,6 @@
 import { Kysely, PostgresDialect } from "kysely";
 import Pool from "pg-pool";
 
-import { LOGGER } from "./logger.config.ts";
 import { SampleTable } from "../modules/sample/sample.model.ts";
 
 interface Database {
@@ -34,6 +33,7 @@ export async function connectToDb() {
       user: DB_USER,
       password: DB_PASSWORD,
       port: DB_PORT,
+      ssl: { rejectUnauthorized: false },
     });
 
     await pool.query("SELECT NOW()");
@@ -46,9 +46,9 @@ export async function connectToDb() {
       dialect,
     });
 
-    LOGGER.debug("Connected to DB");
+    console.debug("Connected to DB");
   } catch (error) {
-    LOGGER.error("Could not connect to DB", error);
+    console.error("Could not connect to DB", error);
 
     throw error;
   }
@@ -58,9 +58,9 @@ export async function disconnectFromDb() {
   try {
     await DB.destroy();
 
-    LOGGER.debug("Disconnected from DB");
+    console.debug("Disconnected from DB");
   } catch (error) {
-    LOGGER.error("Could not connect to DB", error);
+    console.error("Could not connect to DB", error);
 
     throw error;
   }

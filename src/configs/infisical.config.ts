@@ -1,7 +1,5 @@
 import { InfisicalSDK } from "@infisical/sdk";
 
-import { LOGGER } from "./logger.config.ts";
-
 export async function connectToInfisical() {
   try {
     const INFISICAL_ENV = Deno.env.get("INFISICAL_ENV");
@@ -34,9 +32,9 @@ export async function connectToInfisical() {
       Deno.env.set(secret.secretKey, secret.secretValue);
     });
 
-    LOGGER.debug("Retreived Secrets from Infisical");
+    console.debug("Retreived Secrets from Infisical");
   } catch (error) {
-    LOGGER.error("Could not retrieve secrets from Infisical", error);
+    console.error("Could not retrieve secrets from Infisical", error);
 
     throw error;
   }

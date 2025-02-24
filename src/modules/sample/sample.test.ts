@@ -1,37 +1,46 @@
 import { assertEquals } from "jsr:@std/assert";
 
-import { connectToDb, disconnectFromDb } from "../../configs/db.config.ts";
-import { LOGGER } from "../../configs/logger.config.ts";
-import { testSetup } from "../../configs/test.config.ts";
-import { NewSample } from "./sample.model.ts";
+import { DB } from "../../configs/db.config.ts";
+import { testCleanup, testSetup } from "../../configs/test.config.ts";
+import { NewSample, SampleSchema } from "./sample.model.ts";
 import { SampleService } from "./sample.service.ts";
 
-Deno.test("sample - Integration Tests", async (t) => {
+Deno.test("sample.service", async (t) => {
   await testSetup();
 
-  await t.step("db tests", async () => {
+  await t.step("createSample", async () => {
     try {
-      await connectToDb();
-
-      const sampleService = new SampleService();
-
       const newSample: NewSample = {
         name: "Test Sample",
       };
 
-      const createdSample = await sampleService.createSample(newSample);
+      const sampleService = new SampleService();
 
-      assertEquals(typeof createdSample.id, "number");
+      const createSampleResult = await sampleService.createSample(newSample);
 
-      const readNewSample = await sampleService.readSampleById(
-        createdSample.id,
-      );
+      assertEquals(typeof createSampleResult.id, "number");
 
-      assertEquals(readNewSample.name, newSample.name);
+      const createdSample = await DB.selectFrom("sample")
+        .where(
+          "id",
+          "=",
+          createSampleResult.id,
+        )
+        .selectAll().executeTakeFirstOrThrow();
+
+      SampleSchema.parse(createdSample);
+
+      assertEquals(createdSample.name, newSample.name);
+
+      await DB.deleteFrom("sample").where(
+        "id",
+        "=",
+        createSampleResult.id,
+      ).executeTakeFirstOrThrow();
     } catch (error) {
-      LOGGER.error("Migration process failed:", error);
-
-      await disconnectFromDb();
+      console.error("createSample test failed:", error);
     }
   });
+
+  await testCleanup();
 });
