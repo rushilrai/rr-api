@@ -1,9 +1,9 @@
 import "@std/dotenv/load";
 
-import { connectToInfisical } from "./configs/infisical.config.ts";
-import { initRouters } from "./configs/hono.config.ts";
-import { connectToDb } from "./configs/db.config.ts";
-import { initResend } from "./configs/resend.config.ts";
+import { connectToInfisical } from "./modules/common/configs/infisical.config.ts";
+import { initRouters } from "./modules/common/configs/hono.config.ts";
+import { connectToDb } from "./modules/common/configs/db.config.ts";
+import { initResend } from "./modules/common/configs/resend.config.ts";
 
 async function main() {
   try {

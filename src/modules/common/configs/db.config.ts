@@ -1,7 +1,7 @@
 import { Kysely, PostgresDialect } from "kysely";
 import Pool from "pg-pool";
 
-import { SampleTable } from "../modules/sample/sample.model.ts";
+import { SampleTable } from "../../../modules/sample/sample.model.ts";
 
 interface Database {
   sample: SampleTable;

@@ -3,8 +3,12 @@ import "@std/dotenv/load";
 import * as path from "@std/path";
 import { FileMigrationProvider, Migrator } from "kysely";
 
-import { connectToInfisical } from "../../configs/infisical.config.ts";
-import { connectToDb, DB, disconnectFromDb } from "../../configs/db.config.ts";
+import { connectToInfisical } from "../../modules/common/configs/infisical.config.ts";
+import {
+  connectToDb,
+  DB,
+  disconnectFromDb,
+} from "../../modules/common/configs/db.config.ts";
 
 async function migrateDownDb() {
   try {

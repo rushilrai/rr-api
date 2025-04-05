@@ -1,7 +1,7 @@
 import { assertEquals } from "jsr:@std/assert";
 
-import { DB } from "../../configs/db.config.ts";
-import { testCleanup, testSetup } from "../../configs/test.config.ts";
+import { DB } from "../common/configs/db.config.ts";
+import { testCleanup, testSetup } from "../common/configs/test.config.ts";
 import { NewSample, SampleSchema } from "./sample.model.ts";
 import { SampleService } from "./sample.service.ts";
 
@@ -10,17 +10,19 @@ Deno.test("sample.service", async (t) => {
 
   await t.step("createSample", async () => {
     try {
-      const newSample: NewSample = {
-        name: "Test Sample",
+      const testSample: NewSample = {
+        "name": "Test Sample",
       };
 
       const sampleService = new SampleService();
 
-      const createSampleResult = await sampleService.createSample(newSample);
+      const createSampleResult = await sampleService
+        .createSample(testSample);
 
       assertEquals(typeof createSampleResult.id, "number");
 
-      const createdSample = await DB.selectFrom("sample")
+      const createdSample = await DB
+        .selectFrom("sample")
         .where(
           "id",
           "=",
@@ -30,7 +32,7 @@ Deno.test("sample.service", async (t) => {
 
       SampleSchema.parse(createdSample);
 
-      assertEquals(createdSample.name, newSample.name);
+      assertEquals(createdSample.name, testSample.name);
 
       await DB.deleteFrom("sample").where(
         "id",
