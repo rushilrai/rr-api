@@ -40,12 +40,12 @@ jobs:
             --exclude='.github' \
             --exclude='.env' \
             -e "ssh -i ~/.ssh/id_ed25519 -o StrictHostKeyChecking=no" \
-            ./ ubuntu@${{ secrets.EC2_HOST }}:~/apps/goesg-api/
+            ./ ubuntu@${{ secrets.EC2_HOST }}:~/apps/rr-api/
 
       - name: Deploy on EC2
         run: |
           ssh -i ~/.ssh/id_ed25519 -o StrictHostKeyChecking=no ubuntu@${{ secrets.EC2_HOST }} << 'EOF'
-            cd ~/apps/goesg-api
+            cd ~/apps/rr-api
 
             docker compose down --remove-orphans
             docker compose up --build -d

@@ -1,9 +1,9 @@
 services:
-    goesg-api:
+    rr-api:
         build:
             context: .
             dockerfile: Dockerfile
-        container_name: goesg-api
+        container_name: rr-api
         ports:
             - "8000:8000"
         environment:
