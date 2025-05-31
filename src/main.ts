@@ -7,10 +7,10 @@ import { initResend } from "./modules/common/configs/resend.config.ts";
 
 async function main() {
   try {
-    initRouters();
-    await initResend();
     await connectToInfisical();
     await connectToDb();
+    await initResend();
+    initRouters();
 
     console.debug("rr-api");
   } catch (error) {
