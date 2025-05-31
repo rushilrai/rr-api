@@ -4,7 +4,7 @@
         "dev": "deno run --allow-all src/scripts/migrations/migrateUp.ts && deno run --watch --allow-all src/main.ts",
         "migrate:down": "deno run --allow-all src/scripts/migrations/migrateDown.ts",
         "migrate:up": "deno run --allow-all src/scripts/migrations/migrateUp.ts",
-        "playground": "deno run --allow-all src/scripts/playground/playground.ts",
+        "playground": "deno run --allow-all src/scripts/playground.ts",
         "start": "deno run --allow-all src/scripts/migrations/migrateUp.ts && deno run --allow-all src/main.ts",
         "test": "deno run --allow-all src/scripts/migrations/migrateUp.ts && deno test --allow-all --trace-leaks"
     },
