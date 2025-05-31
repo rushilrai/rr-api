@@ -25,9 +25,13 @@ const ROUTERS: Router[] = [
 ];
 
 export function initRouters() {
+  HONO_APP.get("/", (c) => {
+    return c.text("rr-api");
+  });
+
   for (let index = 0; index < ROUTERS.length; index++) {
     HONO_APP.route(ROUTERS[index].path, ROUTERS[index].router);
   }
 
-  Deno.serve(HONO_APP.fetch);
+  Deno.serve({ hostname: "0.0.0.0", port: 8000 }, HONO_APP.fetch);
 }

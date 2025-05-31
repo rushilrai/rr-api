@@ -1,4 +1,4 @@
-FROM denoland/deno:2.1.5
+FROM denoland/deno:2.3.3
 
 EXPOSE 8000
 
@@ -14,6 +14,6 @@ RUN mkdir -p ./logs && \
 
 USER deno
 
-RUN deno cache src/main.ts
+RUN deno task cache
 
-CMD ["run", "--allow-net", "--allow-env", "--allow-read", "--allow-write", "src/main.ts"]
+CMD ["task", "start"]
